@@ -118,8 +118,9 @@
     .rca-msg{max-width:1050px;margin:0 auto clamp(64px,9vh,110px);text-align:center}
     .rca-msg h1{font-family:var(--cond);font-weight:600;font-size:clamp(44px,7.4vw,88px);line-height:1.03;letter-spacing:.035em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:28px}
     .rca-msg h1 .wt{color:var(--white)}
-    .rca-msg h1.rca-h1-img{margin-bottom:30px}
-    .rca-msg h1.rca-h1-img img{width:100%;max-width:1050px;height:auto;margin:0 auto}
+    /* full-bleed so the headline can exceed the content column */
+    .rca-msg h1.rca-h1-img{width:100vw;max-width:100vw;position:relative;left:50%;transform:translateX(-50%);margin:0 auto 30px}
+    .rca-msg h1.rca-h1-img img{width:min(1500px,92vw);max-width:none;height:auto;margin:0 auto;display:block}
     .rca-msg .sub{font-size:clamp(15px,1.55vw,18px);color:var(--white);max-width:640px;margin:0 auto 32px;font-weight:300;line-height:1.7}
     .rca-msg .sub .dg{color:var(--gold-deep);font-weight:500}
     /* black gradient that scroll-blends the hero photo into section 2 */
