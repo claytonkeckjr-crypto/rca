@@ -98,10 +98,13 @@
     /* ============ HERO — the flyer ============ */
     .rca-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:var(--black)}
     .rca-hero-bg{position:absolute;inset:0}
-    .rca-hero-bg img{width:100%;height:120%;object-fit:cover;object-position:center 30%;opacity:1;filter:contrast(1.05);will-change:transform}
+    .rca-hero-bg img{width:100%;height:120%;object-fit:cover;object-position:center 44%;opacity:1;filter:contrast(1.05);will-change:transform}
     /* scrim for text legibility + soft blend into the section below */
     .rca-hero-bg::after{content:'';position:absolute;inset:0;
-      background:linear-gradient(180deg,#050505 0%,rgba(5,5,5,.82) 12%,rgba(5,5,5,.34) 30%,rgba(5,5,5,.16) 46%,rgba(5,5,5,.4) 70%,rgba(5,5,5,.9) 92%,#050505 100%)}
+      background:linear-gradient(180deg,transparent 0%,rgba(5,5,5,.1) 42%,rgba(5,5,5,.44) 72%,rgba(5,5,5,.9) 92%,#050505 100%)}
+    /* fixed-height dark cap at the top — mimics the flyer (dark behind logo, fading into the photo) */
+    .rca-hero-topshade{position:absolute;top:0;left:0;right:0;height:clamp(380px,58vh,760px);z-index:1;pointer-events:none;
+      background:linear-gradient(180deg,#050505 0%,rgba(5,5,5,.94) 20%,rgba(5,5,5,.62) 52%,rgba(5,5,5,.26) 78%,transparent 100%)}
     .rca-hero-frame{position:absolute;inset:20px;border:1px solid rgba(200,162,74,.6);pointer-events:none;z-index:1}
     .rca-hero-frame::before{content:'';position:absolute;inset:6px;border:1px solid rgba(200,162,74,.22)}
     .rca-hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:130px 28px 86px;text-align:center;width:100%}
@@ -439,6 +442,7 @@
        should be removed once the preferred image is supplied. -->
   <section class="rca-hero" id="top">
     <div class="rca-hero-bg"><img src="https://assets.cdn.filesafe.space/uIEyqGO7O7OCosdZeJV4/media/6a281389b71c98ada9344849.jpg" alt="Chris K. Jones — Relentless Calm Advisors"></div>
+    <div class="rca-hero-topshade" aria-hidden="true"></div>
     <div class="rca-hero-frame"></div>
     <div class="rca-hero-inner">
       <img class="rca-hero-logo" src="https://assets.cdn.filesafe.space/uIEyqGO7O7OCosdZeJV4/media/6a2b03afe5084c4b718ef7fa.png" alt="Relentless Calm Advisors logo">
