@@ -98,7 +98,7 @@
     /* ============ HERO — the flyer ============ */
     .rca-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:var(--black)}
     .rca-hero-bg{position:absolute;inset:0}
-    .rca-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:1;filter:contrast(1.05)}
+    .rca-hero-bg img{width:100%;height:120%;object-fit:cover;object-position:center 30%;opacity:1;filter:contrast(1.05);will-change:transform}
     /* scrim for text legibility + soft blend into the section below */
     .rca-hero-bg::after{content:'';position:absolute;inset:0;
       background:linear-gradient(180deg,rgba(5,5,5,.74) 0%,rgba(5,5,5,.48) 34%,rgba(5,5,5,.72) 66%,rgba(5,5,5,.96) 90%,#050505 100%)}
@@ -108,7 +108,7 @@
     /* hero logo — top center, light fade in + gentle breathing */
     @keyframes rcaLogoIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
     @keyframes rcaLogoBreath{0%,100%{opacity:.82}50%{opacity:1}}
-    .rca-hero-logo{height:clamp(96px,15vw,150px);width:auto;margin:0 auto clamp(70px,14vh,150px);
+    .rca-hero-logo{height:clamp(96px,15vw,150px);width:auto;margin:0 auto clamp(150px,30vh,320px);
       animation:rcaLogoIn 1s cubic-bezier(.22,.61,.36,1) both, rcaLogoBreath 6s ease-in-out 1s infinite}
     .rca-kicker{font-family:var(--cond);font-weight:500;letter-spacing:.4em;text-transform:uppercase;font-size:13px;color:var(--gold);margin-bottom:24px}
     .rca-hero h1{font-family:var(--cond);font-weight:600;font-size:clamp(44px,7.4vw,88px);line-height:1.03;letter-spacing:.035em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:28px}
@@ -840,8 +840,20 @@
       if(!root)return;
       root.classList.add('js');
       var header=root.querySelector('#rcaHeader');
-      function onScroll(){header.classList.toggle('scrolled',window.scrollY>40);}
-      window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+      var heroBg=root.querySelector('.rca-hero-bg img');
+      var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var ticking=false;
+      function frame(){
+        ticking=false;
+        var y=window.scrollY||window.pageYOffset||0;
+        header.classList.toggle('scrolled',y>40);
+        // parallax: background drifts up at ~0.2x of scroll (img is 120% tall = headroom)
+        if(heroBg&&!reduceMotion&&y<window.innerHeight*1.5){
+          heroBg.style.transform='translate3d(0,'+(-(y*0.2))+'px,0)';
+        }
+      }
+      function onScroll(){if(!ticking){ticking=true;(window.requestAnimationFrame||function(f){return setTimeout(f,16);})(frame);}}
+      window.addEventListener('scroll',onScroll,{passive:true});frame();
       var burger=root.querySelector('#rcaBurger'),menu=root.querySelector('#rcaMenu');
       if(burger&&menu){
         burger.addEventListener('click',function(){
