@@ -98,34 +98,61 @@
     /* ============ HERO — the flyer ============ */
     .rca-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:var(--black)}
     .rca-hero-bg{position:absolute;inset:0}
-    .rca-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 28%;opacity:.46;filter:grayscale(100%) contrast(1.2)}
+    .rca-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:1;filter:contrast(1.05)}
+    /* scrim for text legibility + soft blend into the section below */
     .rca-hero-bg::after{content:'';position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(5,5,5,.9) 0%,rgba(5,5,5,.5) 36%,rgba(5,5,5,.92) 72%,#050505 100%)}
+      background:linear-gradient(180deg,rgba(5,5,5,.74) 0%,rgba(5,5,5,.48) 34%,rgba(5,5,5,.72) 66%,rgba(5,5,5,.96) 90%,#050505 100%)}
     .rca-hero-frame{position:absolute;inset:20px;border:1px solid rgba(200,162,74,.6);pointer-events:none;z-index:1}
     .rca-hero-frame::before{content:'';position:absolute;inset:6px;border:1px solid rgba(200,162,74,.22)}
-    .rca-hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:150px 28px 80px;text-align:center;width:100%}
+    .rca-hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:130px 28px 86px;text-align:center;width:100%}
+    /* hero logo — top center, light fade in + gentle breathing */
+    @keyframes rcaLogoIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+    @keyframes rcaLogoBreath{0%,100%{opacity:.82}50%{opacity:1}}
+    .rca-hero-logo{height:clamp(96px,15vw,150px);width:auto;margin:0 auto 26px;
+      animation:rcaLogoIn 1s cubic-bezier(.22,.61,.36,1) both, rcaLogoBreath 6s ease-in-out 1s infinite}
     .rca-kicker{font-family:var(--cond);font-weight:500;letter-spacing:.4em;text-transform:uppercase;font-size:13px;color:var(--gold);margin-bottom:24px}
-    .rca-hero h1{font-family:var(--cond);font-weight:600;font-size:clamp(44px,7.4vw,88px);line-height:1.03;letter-spacing:.035em;text-transform:uppercase;color:var(--white);margin-bottom:28px}
-    .rca-hero .sub{font-size:clamp(15px,1.5vw,18px);color:var(--steel);max-width:600px;margin:0 auto 16px;font-weight:300}
+    .rca-hero h1{font-family:var(--cond);font-weight:600;font-size:clamp(44px,7.4vw,88px);line-height:1.03;letter-spacing:.035em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:28px}
+    .rca-hero h1 .wt{color:var(--white)}
+    .rca-hero .sub{font-size:clamp(15px,1.55vw,18px);color:var(--white);max-width:640px;margin:0 auto 32px;font-weight:300;line-height:1.7}
+    .rca-hero .sub .dg{color:var(--gold-deep);font-weight:500}
     .rca-hero .standard{font-family:var(--cond);font-weight:500;letter-spacing:.16em;text-transform:uppercase;font-size:clamp(14px,1.5vw,17px);color:var(--gold);margin-bottom:6px}
     .rca-hero .standard-it{font-family:var(--serif);font-style:italic;color:var(--white);font-size:16px;margin-bottom:34px}
-    .rca-hero-cta{margin-bottom:48px}
-    .rca-pillars3{display:grid;grid-template-columns:repeat(3,1fr);max-width:760px;margin:0 auto 30px;border-top:1px solid rgba(200,162,74,.5);padding-top:30px}
-    .rca-pillars3>div{padding:0 20px}
-    .rca-pillars3>div+div{border-left:1px solid rgba(200,162,74,.35)}
-    .rca-pillars3 .ico{color:var(--gold);margin-bottom:10px}
-    .rca-pillars3 h5{font-family:var(--cond);font-weight:600;letter-spacing:.24em;text-transform:uppercase;font-size:16px;color:var(--white);margin-bottom:7px}
-    .rca-pillars3 p{font-size:12.5px;color:var(--steel);font-weight:300;line-height:1.55}
-    .rca-pillars3 p .g{color:var(--gold)}
-    .rca-catbar{display:flex;flex-wrap:wrap;justify-content:center;gap:0 16px;max-width:720px;margin:0 auto 16px;padding:12px 8px;
-      border-top:1px solid rgba(200,162,74,.5);border-bottom:1px solid rgba(200,162,74,.5);
-      font-family:var(--cond);font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:var(--white)}
-    .rca-catbar .bar{color:var(--gold)}
-    .rca-idwords{font-family:var(--cond);font-weight:300;letter-spacing:.24em;text-transform:uppercase;font-size:11.5px;color:var(--steel)}
-    .rca-idwords .d{color:var(--gold);padding:0 7px}
+    .rca-hero-cta{margin-bottom:42px}
+    /* dynamic pillar line — Leadership / Connections / Legacy */
+    .rca-pillars-line{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;
+      max-width:760px;margin:0 auto 40px;padding-bottom:16px;border-bottom:1px solid var(--gold-deep)}
+    .rca-pillars-line .p{font-family:var(--cond);font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+      font-size:clamp(15px,2vw,20px);padding:0 clamp(16px,3vw,30px);color:var(--white);
+      animation:rcaPillarPulse 4.5s ease-in-out infinite}
+    .rca-pillars-line .p.alt{color:var(--gold-deep)}
+    .rca-pillars-line .p:nth-child(3){animation-delay:.6s}
+    .rca-pillars-line .p:nth-child(5){animation-delay:1.2s}
+    .rca-pillars-line .sep{width:1px;align-self:stretch;min-height:26px;background:var(--gold-deep)}
+    @keyframes rcaPillarPulse{0%,100%{opacity:.72}50%{opacity:1}}
+
+    /* scrolling strips (CSS marquee, opposite directions) */
+    .rca-hstrip{overflow:hidden;position:relative;width:100%;max-width:760px;margin:0 auto;
+      border-top:1px solid var(--gold-deep)}
+    .rca-hstrip:last-child{border-bottom:1px solid var(--gold-deep)}
+    .rca-hstrip::before,.rca-hstrip::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+    .rca-hstrip::before{left:0;background:linear-gradient(90deg,#050505,transparent)}
+    .rca-hstrip::after{right:0;background:linear-gradient(270deg,#050505,transparent)}
+    .rca-hstrip-track{display:flex;width:max-content;padding:11px 0;
+      font-family:var(--cond);text-transform:uppercase;white-space:nowrap}
+    .rca-hstrip-rtl .rca-hstrip-track{animation:rcaStripRTL 28s linear infinite}
+    .rca-hstrip-ltr .rca-hstrip-track{animation:rcaStripLTR 32s linear infinite}
+    .rca-hstrip:hover .rca-hstrip-track{animation-play-state:paused}
+    .rca-hstrip-track .seg{display:inline-flex;align-items:center}
+    .rca-hstrip-cat .seg{font-weight:500;letter-spacing:.14em;font-size:12.5px;color:var(--white)}
+    .rca-hstrip-cat .bar{color:var(--gold-deep);padding:0 18px}
+    .rca-hstrip-id .seg{font-weight:300;letter-spacing:.26em;font-size:11.5px;color:var(--steel)}
+    .rca-hstrip-id .d{color:var(--gold-deep);padding:0 14px}
+    @keyframes rcaStripRTL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes rcaStripLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
     /* ============ 01 THE STANDARD ============ */
-    .rca-standard{background:var(--black);border-top:1px solid rgba(200,162,74,.2)}
+    /* slight blend up into the hero (no hard seam) */
+    .rca-standard{background:var(--black);margin-top:-1px}
     .rca-standard-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:start}
     .rca-bigline{font-family:var(--cond);font-weight:600;font-size:clamp(30px,4.2vw,50px);line-height:1.1;letter-spacing:.02em;text-transform:uppercase}
     .rca-bigline .g{color:var(--gold)}
@@ -343,8 +370,9 @@
     @media (prefers-reduced-motion:reduce){
       .rca *{animation:none!important;transition:none!important}
       .rca.js .rca-reveal,.rca-load{opacity:1!important;transform:none!important}
-      .rca-marq{overflow-x:auto}
-      .rca-marq-track{animation:none!important}
+      .rca-hero-logo{opacity:1!important}
+      .rca-marq,.rca-hstrip{overflow-x:auto}
+      .rca-marq-track,.rca-hstrip-track{animation:none!important}
     }
 
     @media (max-width:940px){
@@ -369,9 +397,8 @@
       .rca-burger.open span:nth-child(2){opacity:0}
       .rca-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
       .rca-hero-frame{inset:10px}
-      .rca-hero-inner{padding:140px 22px 70px}
-      .rca-pillars3{grid-template-columns:1fr;gap:24px;padding-top:26px}
-      .rca-pillars3>div+div{border-left:0;border-top:1px solid rgba(200,162,74,.28);padding-top:22px}
+      .rca-hero-inner{padding:120px 22px 64px}
+      .rca-pillars-line .p{padding:0 16px}
       .rca-mv{grid-template-columns:1fr}
       .rca-mv>div+div{border-left:0;border-top:1px solid rgba(200,162,74,.3)}
       .rca-proof-grid{grid-template-columns:1fr}
@@ -409,38 +436,43 @@
        Current image is a placeholder; the "looking-off-to-the-side" photo
        should be removed once the preferred image is supplied. -->
   <section class="rca-hero" id="top">
-    <div class="rca-hero-bg"><img src="https://assets.cdn.filesafe.space/uIEyqGO7O7OCosdZeJV4/media/6a281389b71c98ada9344849.jpg" alt="Chris K. Jones — leadership advisor and keynote speaker"></div>
+    <div class="rca-hero-bg"><img src="https://assets.cdn.filesafe.space/uIEyqGO7O7OCosdZeJV4/media/6a2b068cee57e63b961b1c44.png" alt="Relentless Calm Advisors"></div>
     <div class="rca-hero-frame"></div>
     <div class="rca-hero-inner">
+      <img class="rca-hero-logo" src="https://assets.cdn.filesafe.space/uIEyqGO7O7OCosdZeJV4/media/6a2b03afe5084c4b718ef7fa.png" alt="Relentless Calm Advisors logo">
       <div class="rca-kicker rca-load">Relentless Drive &amp; Calm Mastery</div>
-      <h1 class="rca-load d1">Lead Well.<br>Connect Deeply.<br>Build What Lasts.</h1>
-      <p class="sub rca-load d2">I help leaders and organizations perform under pressure, strengthen their people, and build a legacy that outlives them.</p>
-      <p class="standard rca-load d2">Strategy. Connection. Perspective. Purpose.</p>
-      <p class="standard-it rca-load d2">That's the standard.</p>
+      <h1 class="rca-load d1">Lead Well.<br><span class="wt">Connect Deeply.</span><br>Build What Lasts.</h1>
+      <p class="sub rca-load d2">I help leaders and organizations perform under pressure, strengthen their people, and build a legacy that outlives them. <span class="dg">Strategy. Connection. Perspective. Purpose.</span> That's the standard.</p>
       <div class="rca-hero-cta rca-load d3">
         <a href="#book" class="rca-btn rca-btn-primary">Book an Alignment Call</a>
       </div>
-      <div class="rca-pillars3 rca-load d4">
-        <div>
-          <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M10 4h4"/><path d="M9.5 8h5l1 6h-7l1-6z"/><path d="M8 17h8M7 20h10"/></svg></div>
-          <h5>Leadership</h5>
-          <p>Executive Performance.<br><span class="g">Built for Pressure.</span></p>
-        </div>
-        <div>
-          <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/></svg></div>
-          <h5>Connection</h5>
-          <p>Real Conversations.<br><span class="g">Stronger Communities.</span></p>
-        </div>
-        <div>
-          <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><line x1="12" y1="7.5" x2="12" y2="21"/><path d="M5 13a7 7 0 0 0 14 0M3.5 13H6M18 13h2.5"/></svg></div>
-          <h5>Legacy</h5>
-          <p>Equip Today.<br><span class="g">Impact Generations.</span></p>
+      <div class="rca-pillars-line rca-load d4">
+        <span class="p">Leadership</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="p alt">Connections</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="p">Legacy</span>
+      </div>
+      <div class="rca-hstrip rca-hstrip-rtl rca-hstrip-cat rca-load d5" aria-label="Executive Advisory, Youth and Community Impact, Media and Storytelling">
+        <div class="rca-hstrip-track" aria-hidden="true">
+          <span class="seg">Executive Advisory</span><span class="bar">|</span><span class="seg">Youth &amp; Community Impact</span><span class="bar">|</span><span class="seg">Media &amp; Storytelling</span><span class="bar">|</span>
+          <span class="seg">Executive Advisory</span><span class="bar">|</span><span class="seg">Youth &amp; Community Impact</span><span class="bar">|</span><span class="seg">Media &amp; Storytelling</span><span class="bar">|</span>
+          <span class="seg">Executive Advisory</span><span class="bar">|</span><span class="seg">Youth &amp; Community Impact</span><span class="bar">|</span><span class="seg">Media &amp; Storytelling</span><span class="bar">|</span>
+          <span class="seg">Executive Advisory</span><span class="bar">|</span><span class="seg">Youth &amp; Community Impact</span><span class="bar">|</span><span class="seg">Media &amp; Storytelling</span><span class="bar">|</span>
+          <span class="seg">Executive Advisory</span><span class="bar">|</span><span class="seg">Youth &amp; Community Impact</span><span class="bar">|</span><span class="seg">Media &amp; Storytelling</span><span class="bar">|</span>
+          <span class="seg">Executive Advisory</span><span class="bar">|</span><span class="seg">Youth &amp; Community Impact</span><span class="bar">|</span><span class="seg">Media &amp; Storytelling</span><span class="bar">|</span>
         </div>
       </div>
-      <div class="rca-catbar rca-load d5">
-        <span>Executive Advisory</span><span class="bar">|</span><span>Youth &amp; Community Impact</span><span class="bar">|</span><span>Media &amp; Storytelling</span>
+      <div class="rca-hstrip rca-hstrip-ltr rca-hstrip-id rca-load d5" aria-label="Veteran, Advisor, Builder, Storyteller, Servant Leader">
+        <div class="rca-hstrip-track" aria-hidden="true">
+          <span class="seg">Veteran</span><span class="d">&middot;</span><span class="seg">Advisor</span><span class="d">&middot;</span><span class="seg">Builder</span><span class="d">&middot;</span><span class="seg">Storyteller</span><span class="d">&middot;</span><span class="seg">Servant Leader</span><span class="d">&middot;</span>
+          <span class="seg">Veteran</span><span class="d">&middot;</span><span class="seg">Advisor</span><span class="d">&middot;</span><span class="seg">Builder</span><span class="d">&middot;</span><span class="seg">Storyteller</span><span class="d">&middot;</span><span class="seg">Servant Leader</span><span class="d">&middot;</span>
+          <span class="seg">Veteran</span><span class="d">&middot;</span><span class="seg">Advisor</span><span class="d">&middot;</span><span class="seg">Builder</span><span class="d">&middot;</span><span class="seg">Storyteller</span><span class="d">&middot;</span><span class="seg">Servant Leader</span><span class="d">&middot;</span>
+          <span class="seg">Veteran</span><span class="d">&middot;</span><span class="seg">Advisor</span><span class="d">&middot;</span><span class="seg">Builder</span><span class="d">&middot;</span><span class="seg">Storyteller</span><span class="d">&middot;</span><span class="seg">Servant Leader</span><span class="d">&middot;</span>
+          <span class="seg">Veteran</span><span class="d">&middot;</span><span class="seg">Advisor</span><span class="d">&middot;</span><span class="seg">Builder</span><span class="d">&middot;</span><span class="seg">Storyteller</span><span class="d">&middot;</span><span class="seg">Servant Leader</span><span class="d">&middot;</span>
+          <span class="seg">Veteran</span><span class="d">&middot;</span><span class="seg">Advisor</span><span class="d">&middot;</span><span class="seg">Builder</span><span class="d">&middot;</span><span class="seg">Storyteller</span><span class="d">&middot;</span><span class="seg">Servant Leader</span><span class="d">&middot;</span>
+        </div>
       </div>
-      <div class="rca-idwords rca-load d5">Veteran<span class="d">&middot;</span>Advisor<span class="d">&middot;</span>Builder<span class="d">&middot;</span>Storyteller<span class="d">&middot;</span>Servant Leader</div>
     </div>
   </section>
 
